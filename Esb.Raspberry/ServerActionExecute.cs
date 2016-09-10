@@ -57,6 +57,28 @@ namespace Esb.Raspberry
         public void ReceiveMessage(IEnvironment environment, Envelope envelope, ServoExecuteMessage message)
         {
             Log.Info($"Got Action {message.Action} for servo {message.Channel}");
+            ChannelSettings ChannelSettings;
+            if (Servos.TryGetValue(message.Channel, out ChannelSettings))
+            {
+                switch (message.Action)
+                {
+                    case ServoAction.Home:
+                        ChannelSettings.Home();
+                        break;
+                    case ServoAction.Increase:
+                        ChannelSettings.Increase();
+                        break;
+                    case ServoAction.Decrease:
+                        ChannelSettings.Decrease();
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException();
+                }
+            }
+            else
+            {
+                Log.Warn($"Could not Find Servo Settings for Channel {message.Channel}");
+            }
         }
     }
 
