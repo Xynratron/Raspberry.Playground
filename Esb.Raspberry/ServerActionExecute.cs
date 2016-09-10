@@ -11,15 +11,15 @@ using UnitsNet;
 
 namespace Esb.Raspberry
 {
-    public class ServerActionExecuteBase
+    public class ServerI2CActionsBase
     {
         private static I2cDriver _i2CDriver;
         protected static IPwmDevice Device;
 
-        protected static readonly log4net.ILog Log = log4net.LogManager.GetLogger("Esb.Raspberry.ServerActionExecute");
+        protected static readonly log4net.ILog Log = log4net.LogManager.GetLogger("Esb.Raspberry.ServerI2CActions");
         protected static ConcurrentDictionary<PwmChannel, ChannelSettings> Servos = new ConcurrentDictionary<PwmChannel, ChannelSettings>();
 
-        static ServerActionExecuteBase()
+        static ServerI2CActionsBase()
         {
             EnsureI2CDevice();
         }
@@ -52,7 +52,7 @@ namespace Esb.Raspberry
 
     }
 
-    public class ServerActionExecute : ServerActionExecuteBase, IReceiver<ServoExecuteMessage>
+    public class ServerI2CActions : ServerI2CActionsBase, IReceiver<ServoExecuteMessage>
     {
         public void ReceiveMessage(IEnvironment environment, Envelope envelope, ServoExecuteMessage message)
         {
@@ -82,7 +82,7 @@ namespace Esb.Raspberry
         }
     }
 
-    public class ServerActionExecuteAddServo : ServerActionExecuteBase, IReceiver<EnableI2CChannel>
+    public class ServerI2CActionsAddChannel : ServerI2CActionsBase, IReceiver<EnableI2CChannel>
     {
         public void ReceiveMessage(IEnvironment environment, Envelope envelope, EnableI2CChannel message)
         {
@@ -103,5 +103,34 @@ namespace Esb.Raspberry
                 Log.Info($"Servo for Channel {message.Channel} could not be added. It may allready exists.");
             }
         }
+    }
+
+    public class GpioPinServer
+    {
+        protected static GpioConnection GpioConnection = new GpioConnection();
+    }
+
+    public class GpioPinServerSetStatus : GpioPinServer, IReceiver<GpioSetStatus>
+    {
+        public void ReceiveMessage(IEnvironment environment, Envelope envelope, GpioSetStatus message)
+        {
+            lock (GpioConnection)
+            {
+                if (!GpioConnection.Contains(message.Pin))
+                    GpioConnection.Add(message.Pin.Output());
+                GpioConnection[message.Pin] = message.State;
+            }
+        }
+    }
+
+    public class GpioSetStatus
+    {
+        public GpioSetStatus(ProcessorPin pin, bool state)
+        {
+            Pin = pin;
+            State = state;
+        }
+        public ProcessorPin Pin { get; }
+        public bool State { get; }
     }
 }
