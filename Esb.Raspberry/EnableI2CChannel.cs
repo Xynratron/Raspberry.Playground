@@ -2,9 +2,9 @@
 
 namespace Esb.Raspberry
 {
-    public class CreateServoMessage
+    public class EnableI2CChannel
     {
-        public CreateServoMessage(PwmChannel channel, int minPwm = 200, int maxPwm = 700, int offset = 0, int step = 5)
+        public EnableI2CChannel(PwmChannel channel, int minPwm = 200, int maxPwm = 700, int offset = 0, int step = 5)
         {
             Step = step;
             Offset = offset;

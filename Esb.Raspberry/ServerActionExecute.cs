@@ -62,13 +62,13 @@ namespace Esb.Raspberry
             {
                 switch (message.Action)
                 {
-                    case ServoAction.Home:
+                    case I2CChannelAction.Home:
                         ChannelSettings.Home();
                         break;
-                    case ServoAction.Increase:
+                    case I2CChannelAction.Increase:
                         ChannelSettings.Increase();
                         break;
-                    case ServoAction.Decrease:
+                    case I2CChannelAction.Decrease:
                         ChannelSettings.Decrease();
                         break;
                     default:
@@ -82,9 +82,9 @@ namespace Esb.Raspberry
         }
     }
 
-    public class ServerActionExecuteAddServo : ServerActionExecuteBase, IReceiver<CreateServoMessage>
+    public class ServerActionExecuteAddServo : ServerActionExecuteBase, IReceiver<EnableI2CChannel>
     {
-        public void ReceiveMessage(IEnvironment environment, Envelope envelope, CreateServoMessage message)
+        public void ReceiveMessage(IEnvironment environment, Envelope envelope, EnableI2CChannel message)
         {
             var channelSettings = new ChannelSettings(Device, message.Channel)
             {

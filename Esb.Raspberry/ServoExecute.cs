@@ -4,7 +4,7 @@ namespace Esb.Raspberry
 {
     public class ServoExecuteMessage
     {
-        public ServoAction Action { get; set; }
+        public I2CChannelAction Action { get; set; }
         public PwmChannel Channel { get; set; }
     }
 }

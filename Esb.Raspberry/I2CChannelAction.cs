@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Esb.Raspberry
 {
-    public enum ServoAction
+    public enum I2CChannelAction
     {
         Home, Increase, Decrease
     }

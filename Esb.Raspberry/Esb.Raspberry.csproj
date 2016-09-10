@@ -79,9 +79,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ChannelSettings.cs" />
-    <Compile Include="CreateServoMessage.cs" />
+    <Compile Include="EnableI2CChannel.cs" />
     <Compile Include="ServoExecute.cs" />
-    <Compile Include="ServoAction.cs" />
+    <Compile Include="I2CChannelAction.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServerActionExecute.cs" />
   </ItemGroup>

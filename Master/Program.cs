@@ -14,9 +14,9 @@ namespace Master
     {
         static void Main(string[] args)
         {
-            MessageSender.Send(new CreateServoMessage(PwmChannel.C0, 325, 525, 0, 5));
-            MessageSender.Send(new CreateServoMessage(PwmChannel.C14, 200, 700, 0, 25));
-            MessageSender.Send(new CreateServoMessage(PwmChannel.C15, 200, 700, 0, 25));
+            MessageSender.Send(new EnableI2CChannel(PwmChannel.C0, 325, 525, 0, 5));
+            MessageSender.Send(new EnableI2CChannel(PwmChannel.C14, 200, 700, 0, 25));
+            MessageSender.Send(new EnableI2CChannel(PwmChannel.C15, 200, 700, 0, 25));
 
             GamePad();
         }
@@ -82,7 +82,7 @@ namespace Master
             {
                 var servoExecuteMessage = new ServoExecuteMessage();
                 servoExecuteMessage.Channel = PwmChannel.C14;
-                servoExecuteMessage.Action = ServoAction.Decrease;
+                servoExecuteMessage.Action = I2CChannelAction.Decrease;
                 MessageSender.Send(servoExecuteMessage);
             }
 
@@ -90,7 +90,7 @@ namespace Master
             {
                 var servoExecuteMessage = new ServoExecuteMessage();
                 servoExecuteMessage.Channel = PwmChannel.C14;
-                servoExecuteMessage.Action = ServoAction.Increase;
+                servoExecuteMessage.Action = I2CChannelAction.Increase;
                 MessageSender.Send(servoExecuteMessage);
             }
 
@@ -98,7 +98,7 @@ namespace Master
             {
                 var servoExecuteMessage = new ServoExecuteMessage();
                 servoExecuteMessage.Channel = PwmChannel.C15;
-                servoExecuteMessage.Action = ServoAction.Increase;
+                servoExecuteMessage.Action = I2CChannelAction.Increase;
                 MessageSender.Send(servoExecuteMessage);
             }
 
@@ -106,7 +106,7 @@ namespace Master
             {
                 var servoExecuteMessage = new ServoExecuteMessage();
                 servoExecuteMessage.Channel = PwmChannel.C15;
-                servoExecuteMessage.Action = ServoAction.Decrease;
+                servoExecuteMessage.Action = I2CChannelAction.Decrease;
                 MessageSender.Send(servoExecuteMessage);
             }
 
@@ -136,14 +136,14 @@ namespace Master
                                 MessageSender.Send(new ServoExecuteMessage
                                 {
                                     Channel = PwmChannel.C0,
-                                    Action = ServoAction.Decrease
+                                    Action = I2CChannelAction.Decrease
                                 });
                             else
                             {
                                 MessageSender.Send(new ServoExecuteMessage
                                 {
                                     Channel = PwmChannel.C0,
-                                    Action = ServoAction.Increase
+                                    Action = I2CChannelAction.Increase
                                 });
                             }
 
@@ -158,7 +158,7 @@ namespace Master
             //    MessageSender.Send(new ServoExecuteMessage
             //    {
             //        Channel = PwmChannel.C0,
-            //        Action = ServoAction.Decrease
+            //        Action = I2CChannelAction.Decrease
             //    });
             //}
 
@@ -166,7 +166,7 @@ namespace Master
             //{
             //    var servoExecuteMessage = new ServoExecuteMessage();
             //    servoExecuteMessage.Channel = PwmChannel.C0;
-            //    servoExecuteMessage.Action = ServoAction.Increase;
+            //    servoExecuteMessage.Action = I2CChannelAction.Increase;
             //    MessageSender.Send(servoExecuteMessage);
             //}
         }
@@ -186,13 +186,13 @@ namespace Master
                 switch (key.Key)
                 {
                     case ConsoleKey.LeftArrow:
-                        servoExecuteMessage.Action = ServoAction.Decrease; 
+                        servoExecuteMessage.Action = I2CChannelAction.Decrease; 
                         break;
                     case ConsoleKey.RightArrow:
-                        servoExecuteMessage.Action = ServoAction.Increase;
+                        servoExecuteMessage.Action = I2CChannelAction.Increase;
                         break;
                     case ConsoleKey.UpArrow:
-                        servoExecuteMessage.Action = ServoAction.Home;
+                        servoExecuteMessage.Action = I2CChannelAction.Home;
                         break;
                     case ConsoleKey.S:
                         currentchannel = PwmChannel.C0;
