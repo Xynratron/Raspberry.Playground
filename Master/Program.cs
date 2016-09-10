@@ -17,7 +17,7 @@ namespace Master
 
         private static void SteeringTest()
         {
-            MessageSender.Send(new CreateServoMessage(PwmChannel.C0, 325, 525,0,5));
+            MessageSender.Send(new CreateServoMessage(PwmChannel.C0, 325, 525, 0, 5));
             MessageSender.Send(new CreateServoMessage(PwmChannel.C14, 200, 700, 0, 25));
             MessageSender.Send(new CreateServoMessage(PwmChannel.C15, 200, 700, 0, 25));
 
