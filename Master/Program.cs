@@ -6,6 +6,7 @@ using System.Timers;
 using Bmf.Shared.Esb;
 using Esb.Raspberry;
 using Raspberry.IO.Components.Controllers.Pca9685;
+using Raspberry.IO.GeneralPurpose;
 using SharpDX.DirectInput;
 
 namespace Master
@@ -17,6 +18,29 @@ namespace Master
             MessageSender.Send(new EnableI2CChannel(PwmChannel.C0, 325, 525, 0, 5));
             MessageSender.Send(new EnableI2CChannel(PwmChannel.C14, 200, 700, 0, 25));
             MessageSender.Send(new EnableI2CChannel(PwmChannel.C15, 200, 700, 0, 25));
+
+            //EN_M0 = 4  # servo driver IC CH4
+            //EN_M1 = 5  # servo driver IC CH5
+            MessageSender.Send(new EnableI2CChannel(PwmChannel.C4, 0, 4000, 0, 400));
+            MessageSender.Send(new EnableI2CChannel(PwmChannel.C5, 0, 4000, 0, 400));
+
+            /*Motor0_A = 11  # pin11
+              Motor0_B = 12  # pin12
+              Motor1_A = 13  # pin13s
+              Motor1_B = 15  # pin15
+            */
+
+            //MessageSender.Send(new GpioSetStatus(ProcessorPin.Pin17, true));
+            //MessageSender.Send(new GpioSetStatus(ProcessorPin.Pin18, false));
+            //MessageSender.Send(new GpioSetStatus(ProcessorPin.Pin27, true));
+            //MessageSender.Send(new GpioSetStatus(ProcessorPin.Pin22, false));
+
+            //System.Threading.Thread.Sleep(1000);
+
+            //MessageSender.Send(new GpioSetStatus(ProcessorPin.Pin17, false));
+            //MessageSender.Send(new GpioSetStatus(ProcessorPin.Pin18, false));
+            //MessageSender.Send(new GpioSetStatus(ProcessorPin.Pin27, false));
+            //MessageSender.Send(new GpioSetStatus(ProcessorPin.Pin22, false));
 
             GamePad();
         }
@@ -153,6 +177,60 @@ namespace Master
                 }
             }
 
+
+            if (button == JoystickOffset.Y)
+            {
+                switch (value)
+                {
+                    case 0:
+                        MessageSender.Send(new GpioSetStatus(ProcessorPin.Pin17, true));
+                        MessageSender.Send(new GpioSetStatus(ProcessorPin.Pin18, false));
+                        MessageSender.Send(new GpioSetStatus(ProcessorPin.Pin27, true));
+                        MessageSender.Send(new GpioSetStatus(ProcessorPin.Pin22, false));
+                        break;
+                    case 65535:
+                        MessageSender.Send(new GpioSetStatus(ProcessorPin.Pin17, false));
+                        MessageSender.Send(new GpioSetStatus(ProcessorPin.Pin18, true));
+                        MessageSender.Send(new GpioSetStatus(ProcessorPin.Pin27, false));
+                        MessageSender.Send(new GpioSetStatus(ProcessorPin.Pin22, true));
+                        break;
+                    default:
+                        MessageSender.Send(new GpioSetStatus(ProcessorPin.Pin17, false));
+                        MessageSender.Send(new GpioSetStatus(ProcessorPin.Pin18, false));
+                        MessageSender.Send(new GpioSetStatus(ProcessorPin.Pin27, false));
+                        MessageSender.Send(new GpioSetStatus(ProcessorPin.Pin22, false));
+                        break;
+                }
+
+            }
+
+            if (button == JoystickOffset.Buttons5 && value == 128)
+            {
+                MessageSender.Send(new ServoExecuteMessage
+                {
+                    Channel = PwmChannel.C4,
+                    Action = I2CChannelAction.Decrease
+                });
+                MessageSender.Send(new ServoExecuteMessage
+                 {
+                     Channel = PwmChannel.C5,
+                     Action = I2CChannelAction.Decrease
+                 });
+            }
+
+            if (button == JoystickOffset.Buttons7 && value == 128)
+            {
+                MessageSender.Send(new ServoExecuteMessage
+                {
+                    Channel = PwmChannel.C4,
+                    Action = I2CChannelAction.Increase
+                });
+                MessageSender.Send(new ServoExecuteMessage
+                {
+                    Channel = PwmChannel.C5,
+                    Action = I2CChannelAction.Increase
+                });
+            }
             //if (button == JoystickOffset.X && value == 0)
             //{
             //    MessageSender.Send(new ServoExecuteMessage
@@ -170,7 +248,7 @@ namespace Master
             //    MessageSender.Send(servoExecuteMessage);
             //}
         }
-
+        
         private static int JoystickOffsetXLastState = 32511;
         private static Timer JoystickOffsetXTimer;
         private static void SteeringTest()
