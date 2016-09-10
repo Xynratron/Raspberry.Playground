@@ -86,16 +86,17 @@ namespace Esb.Raspberry
     {
         public void ReceiveMessage(IEnvironment environment, Envelope envelope, CreateServoMessage message)
         {
-            if (Servos.TryAdd(message.Channel,
-                new ChannelSettings(Device, message.Channel)
-                {
-                    MaxPwm = message.MaxPwm,
-                    MinPwm = message.MinPwm,
-                    Offset = message.Offset,
-                    Step = message.Step
-                }))
+            var channelSettings = new ChannelSettings(Device, message.Channel)
+            {
+                MaxPwm = message.MaxPwm,
+                MinPwm = message.MinPwm,
+                Offset = message.Offset,
+                Step = message.Step
+            };
+            if (Servos.TryAdd(message.Channel, channelSettings))
             {
                 Log.Info($"Added Servo for Channel {message.Channel}.");
+                channelSettings.Home();
             }
             else
             {
