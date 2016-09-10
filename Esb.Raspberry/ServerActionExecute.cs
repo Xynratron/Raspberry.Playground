@@ -13,11 +13,11 @@ namespace Esb.Raspberry
 {
     public class ServerActionExecuteBase
     {
-        private static I2cDriver i2cDriver;
-        protected static IPwmDevice device;
+        private static I2cDriver _i2CDriver;
+        protected static IPwmDevice Device;
 
         protected static readonly log4net.ILog Log = log4net.LogManager.GetLogger("Esb.Raspberry.ServerActionExecute");
-        protected static ConcurrentDictionary<PwmChannel, ChannelSettings> _servos = new ConcurrentDictionary<PwmChannel, ChannelSettings>();
+        protected static ConcurrentDictionary<PwmChannel, ChannelSettings> Servos = new ConcurrentDictionary<PwmChannel, ChannelSettings>();
 
         static ServerActionExecuteBase()
         {
@@ -26,7 +26,7 @@ namespace Esb.Raspberry
 
         private static void EnsureI2CDevice()
         {
-            if (i2cDriver == null)
+            if (_i2CDriver == null)
             {
                 try
                 {
@@ -39,9 +39,9 @@ namespace Esb.Raspberry
                         PwmFrequency = Frequency.FromHertz(60)
                     };
 
-                    i2cDriver = new I2cDriver(options.SdaPin.ToProcessor(), options.SclPin.ToProcessor());
-                    device = new Pca9685Connection(i2cDriver.Connect(options.DeviceAddress));
-                    device.SetPwmUpdateRate(options.PwmFrequency);
+                    _i2CDriver = new I2cDriver(options.SdaPin.ToProcessor(), options.SclPin.ToProcessor());
+                    Device = new Pca9685Connection(_i2CDriver.Connect(options.DeviceAddress));
+                    Device.SetPwmUpdateRate(options.PwmFrequency);
                 }
                 catch (InvalidOperationException e)
                 {
@@ -60,14 +60,12 @@ namespace Esb.Raspberry
         }
     }
 
-
     public class ServerActionExecuteAddServo : ServerActionExecuteBase, IReceiver<CreateServoMessage>
     {
-        
         public void ReceiveMessage(IEnvironment environment, Envelope envelope, CreateServoMessage message)
         {
-            if (_servos.TryAdd(message.Channel,
-                new ChannelSettings(device, message.Channel)
+            if (Servos.TryAdd(message.Channel,
+                new ChannelSettings(Device, message.Channel)
                 {
                     MaxPwm = message.MaxPwm,
                     MinPwm = message.MinPwm,
