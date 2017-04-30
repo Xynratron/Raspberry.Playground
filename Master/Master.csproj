@@ -80,6 +80,7 @@
     <Compile Include="CarDrivng.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ShiftRegisterIoPlaying.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Esb.Raspberry\Esb.Raspberry.csproj">
