@@ -15,6 +15,9 @@ namespace Master
     {
         static void Main(string[] args)
         {
+            GpIoTest();
+            return;
+
             MessageSender.Send(new EnableI2CChannel(PwmChannel.C0, 325, 525, 0, 5));
             MessageSender.Send(new EnableI2CChannel(PwmChannel.C14, 200, 700, 0, 25));
             MessageSender.Send(new EnableI2CChannel(PwmChannel.C15, 200, 700, 0, 25));
@@ -42,7 +45,18 @@ namespace Master
             //MessageSender.Send(new GpioSetStatus(ProcessorPin.Pin27, false));
             //MessageSender.Send(new GpioSetStatus(ProcessorPin.Pin22, false));
 
-            GamePad();
+            //GamePad();
+        }
+
+        private static void GpIoTest()
+        {
+            for (int i = 0; i < 10; i++)
+            {
+                MessageSender.Send(new GpioSetStatus(ProcessorPin.Pin17, true));
+                System.Threading.Thread.Sleep(500);
+                MessageSender.Send(new GpioSetStatus(ProcessorPin.Pin17, false));
+                System.Threading.Thread.Sleep(500);
+            }
         }
 
         private static void GamePad()
