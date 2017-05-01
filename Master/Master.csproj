@@ -87,6 +87,10 @@
       <Project>{08723045-7e6b-4513-95db-56c87772139f}</Project>
       <Name>Esb.Raspberry</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Raspberry.Helper\Raspberry.Helper.csproj">
+      <Project>{60d43d82-3d7d-43bc-b5a1-429b6e7f9df2}</Project>
+      <Name>Raspberry.Helper</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

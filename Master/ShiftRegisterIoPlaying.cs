@@ -8,7 +8,7 @@ namespace Master
     //https://techmike1985.wordpress.com/2013/06/10/74hc595-schieberegister-grundlagen/
     internal class ShiftRegisterIoPlaying
     {
-        static void Start(string[] args)
+        public static void Start()
         {
             Initialize();
 

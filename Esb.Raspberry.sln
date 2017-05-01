@@ -1,11 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+# Visual Studio 15
+VisualStudioVersion = 15.0.26228.12
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Esb.Raspberry", "Esb.Raspberry\Esb.Raspberry.csproj", "{08723045-7E6B-4513-95DB-56C87772139F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Master", "Master\Master.csproj", "{EFF219BE-CF20-4E0B-9DD9-667F201637D6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Raspberry.Helper", "Raspberry.Helper\Raspberry.Helper.csproj", "{60D43D82-3D7D-43BC-B5A1-429B6E7F9DF2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{EFF219BE-CF20-4E0B-9DD9-667F201637D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EFF219BE-CF20-4E0B-9DD9-667F201637D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EFF219BE-CF20-4E0B-9DD9-667F201637D6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{60D43D82-3D7D-43BC-B5A1-429B6E7F9DF2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{60D43D82-3D7D-43BC-B5A1-429B6E7F9DF2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{60D43D82-3D7D-43BC-B5A1-429B6E7F9DF2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{60D43D82-3D7D-43BC-B5A1-429B6E7F9DF2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

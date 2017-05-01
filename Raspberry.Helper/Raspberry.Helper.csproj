@@ -1,19 +1,19 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{08723045-7E6B-4513-95DB-56C87772139F}</ProjectGuid>
+    <ProjectGuid>{60D43D82-3D7D-43BC-B5A1-429B6E7F9DF2}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Esb.Raspberry</RootNamespace>
-    <AssemblyName>Esb.Raspberry</AssemblyName>
+    <RootNamespace>Raspberry.Helper</RootNamespace>
+    <AssemblyName>Raspberry.Helper</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -23,7 +23,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -31,13 +30,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup>
-    <StartupObject />
-  </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Bmf.Shared">
-      <HintPath>..\..\Shared\Bmf.Shared\bin\Debug\Bmf.Shared.dll</HintPath>
-    </Reference>
     <Reference Include="log4net, Version=1.2.15.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <HintPath>..\packages\log4net.2.0.5\lib\net40-full\log4net.dll</HintPath>
       <Private>True</Private>
@@ -78,30 +71,23 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GpioPinServerSetStatus.cs" />
-    <Compile Include="ServerI2CActionsAddChannel.cs" />
+    <Compile Include="ChannelSettings.cs" />
+    <Compile Include="EnableI2CChannel.cs" />
+    <Compile Include="GpioPinServer.cs" />
+    <Compile Include="GpioSetStatus.cs" />
+    <Compile Include="I2CChannelAction.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ServerI2CActionsBase.cs" />
+    <Compile Include="ServerI2CChannelActions.cs" />
+    <Compile Include="ServoExecute.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Raspberry.Helper\Raspberry.Helper.csproj">
-      <Project>{60d43d82-3d7d-43bc-b5a1-429b6e7f9df2}</Project>
-      <Name>Raspberry.Helper</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>copy $(TargetDir)\$(TargetName).dll P:\Documents\JobServer\plugin\$(TargetName).dll
-copy $(TargetDir)\$(TargetName).pdb P:\Documents\JobServer\plugin\temp\$(TargetName).pdb
+    <PostBuildEvent>copy $(TargetDir)\$(TargetName).dll P:\Documents\JobServer\$(TargetName).dll
+copy $(TargetDir)\$(TargetName).pdb P:\Documents\JobServer\$(TargetName).pdb
 </PostBuildEvent>
   </PropertyGroup>
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
 </Project>

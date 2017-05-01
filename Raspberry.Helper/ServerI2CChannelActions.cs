@@ -1,12 +1,30 @@
 using System;
-using Bmf.Shared.Esb;
-using Bmf.Shared.Esb.Types;
 
 namespace Esb.Raspberry
 {
-    public class ServerI2CActions : ServerI2CActionsBase, IReceiver<ServoExecuteMessage>
+    public class ServerI2CActions : ServerI2CActionsBase
     {
-        public void ReceiveMessage(IEnvironment environment, Envelope envelope, ServoExecuteMessage message)
+        public void AddChannel(EnableI2CChannel message)
+        {
+            var channelSettings = new ChannelSettings(Device, message.Channel)
+            {
+                MaxPwm = message.MaxPwm,
+                MinPwm = message.MinPwm,
+                Offset = message.Offset,
+                Step = message.Step
+            };
+            if (Servos.TryAdd(message.Channel, channelSettings))
+            {
+                Log.Info($"Added Servo for Channel {message.Channel}.");
+                channelSettings.Home();
+            }
+            else
+            {
+                Log.Info($"Servo for Channel {message.Channel} could not be added. It may allready exists.");
+            }
+        }
+
+        public void ServoAction(ServoExecuteMessage message)
         {
             Log.Info($"Got Action {message.Action} for servo {message.Channel}");
             ChannelSettings ChannelSettings;
