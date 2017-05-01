@@ -2,7 +2,7 @@ using Bmf.Shared.Esb;
 using Bmf.Shared.Esb.Types;
 using Raspberry.Helper;
 
-namespace Esb.Raspberry
+namespace Raspberry.Esb
 {
     public class ServerI2CProcessor : ServerI2CActions, IReceiver<EnableI2CChannel>,
         IReceiver<ServoExecuteMessage>

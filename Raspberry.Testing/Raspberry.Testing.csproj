@@ -7,8 +7,8 @@
     <ProjectGuid>{EFF219BE-CF20-4E0B-9DD9-667F201637D6}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Master</RootNamespace>
-    <AssemblyName>Master</AssemblyName>
+    <RootNamespace>Raspberry.Testing</RootNamespace>
+    <AssemblyName>Raspberry.Testing</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -83,7 +83,7 @@
     <Compile Include="ShiftRegisterIoPlaying.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Esb.Raspberry\Esb.Raspberry.csproj">
+    <ProjectReference Include="..\Raspberry.Esb\Raspberry.Esb.csproj">
       <Project>{08723045-7e6b-4513-95db-56c87772139f}</Project>
       <Name>Esb.Raspberry</Name>
     </ProjectReference>

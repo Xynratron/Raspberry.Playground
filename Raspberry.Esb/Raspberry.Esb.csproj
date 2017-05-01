@@ -7,8 +7,8 @@
     <ProjectGuid>{08723045-7E6B-4513-95DB-56C87772139F}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Esb.Raspberry</RootNamespace>
-    <AssemblyName>Esb.Raspberry</AssemblyName>
+    <RootNamespace>Raspberry.Esb</RootNamespace>
+    <AssemblyName>Raspberry.Esb</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

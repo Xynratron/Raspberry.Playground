@@ -1,9 +1,8 @@
 ﻿using Bmf.Shared.Esb;
-using Esb.Raspberry;
 using Raspberry.Helper;
 using Raspberry.IO.GeneralPurpose;
 
-namespace Master
+namespace Raspberry.Testing
 {
     //http://www.holgerschurig.de/de/raspi-lauflicht/
     //https://techmike1985.wordpress.com/2013/06/10/74hc595-schieberegister-grundlagen/

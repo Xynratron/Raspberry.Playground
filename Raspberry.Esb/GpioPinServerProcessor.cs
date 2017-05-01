@@ -1,9 +1,8 @@
 using Bmf.Shared.Esb;
 using Bmf.Shared.Esb.Types;
 using Raspberry.Helper;
-using Raspberry.IO.GeneralPurpose;
 
-namespace Esb.Raspberry
+namespace Raspberry.Esb
 {
     public class GpioPinServerProcessor : GpioPinServer, IReceiver<GpioSetStatus>
     {
