@@ -1,5 +1,7 @@
-﻿using Bmf.Shared.Esb;
+﻿using System;
+using Bmf.Shared.Esb;
 using Raspberry.Helper;
+using System.Threading;
 using Raspberry.IO.GeneralPurpose;
 
 namespace Raspberry.Testing
@@ -10,10 +12,10 @@ namespace Raspberry.Testing
         {
             for (int i = 0; i < 10; i++)
             {
-                MessageSender.Send(new GpioSetStatus(pin, true));
-                System.Threading.Thread.Sleep(500);
-                MessageSender.Send(new GpioSetStatus(pin, false));
-                System.Threading.Thread.Sleep(500);
+                pin.On();
+                Thread.Sleep(100);
+                pin.Off();
+                Thread.Sleep(100);
             }
         }
     }

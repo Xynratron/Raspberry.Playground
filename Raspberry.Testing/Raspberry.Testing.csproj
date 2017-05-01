@@ -35,9 +35,6 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Bmf.Shared">
-      <HintPath>..\..\Shared\Bmf.Shared\bin\Debug\Bmf.Shared.dll</HintPath>
-    </Reference>
     <Reference Include="Raspberry.IO, Version=2.2.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Raspberry.IO.GeneralPurpose.2.4\lib\net40\Raspberry.IO.dll</HintPath>
       <Private>True</Private>
@@ -78,11 +75,16 @@
   <ItemGroup>
     <Compile Include="BlinkSomeLed.cs" />
     <Compile Include="CarDrivng.cs" />
+    <Compile Include="Fluent.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ShiftRegisterIoPlaying.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Bmf.Shared\Bmf.Shared.csproj">
+      <Project>{28014fea-c453-4f3f-9bc8-802e69822165}</Project>
+      <Name>Bmf.Shared</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Raspberry.Esb\Raspberry.Esb.csproj">
       <Project>{08723045-7e6b-4513-95db-56c87772139f}</Project>
       <Name>Esb.Raspberry</Name>
@@ -97,6 +99,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>copy $(TargetDir) P:\Documents\Raspberry.Testing</PostBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
