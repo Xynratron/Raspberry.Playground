@@ -80,10 +80,15 @@
   <ItemGroup>
     <Compile Include="ChannelSettings.cs" />
     <Compile Include="EnableI2CChannel.cs" />
+    <Compile Include="GpioPinServer.cs" />
+    <Compile Include="GpioPinServerSetStatus.cs" />
+    <Compile Include="GpioSetStatus.cs" />
+    <Compile Include="ServerI2CActions.cs" />
+    <Compile Include="ServerI2CActionsAddChannel.cs" />
     <Compile Include="ServoExecute.cs" />
     <Compile Include="I2CChannelAction.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ServerActionExecute.cs" />
+    <Compile Include="ServerI2CActionsBase.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
