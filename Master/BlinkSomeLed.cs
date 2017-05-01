@@ -1,5 +1,6 @@
 ﻿using Bmf.Shared.Esb;
 using Esb.Raspberry;
+using Raspberry.Helper;
 using Raspberry.IO.GeneralPurpose;
 
 namespace Master

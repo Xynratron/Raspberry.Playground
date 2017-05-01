@@ -1,6 +1,6 @@
 using System;
 
-namespace Esb.Raspberry
+namespace Raspberry.Helper
 {
     public class ServerI2CActions : ServerI2CActionsBase
     {

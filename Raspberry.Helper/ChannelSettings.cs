@@ -1,7 +1,7 @@
 ﻿using System;
 using Raspberry.IO.Components.Controllers.Pca9685;
 
-namespace Esb.Raspberry
+namespace Raspberry.Helper
 {
     public class ChannelSettings
     {

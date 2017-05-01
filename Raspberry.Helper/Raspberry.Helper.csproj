@@ -78,8 +78,8 @@
     <Compile Include="I2CChannelAction.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServerI2CActionsBase.cs" />
-    <Compile Include="ServerI2CChannelActions.cs" />
-    <Compile Include="ServoExecute.cs" />
+    <Compile Include="ServerI2CActions.cs" />
+    <Compile Include="ServoExecuteMessage.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

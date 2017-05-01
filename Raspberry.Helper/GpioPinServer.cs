@@ -1,6 +1,6 @@
 using Raspberry.IO.GeneralPurpose;
 
-namespace Esb.Raspberry
+namespace Raspberry.Helper
 {
     public class GpioPinServer
     {

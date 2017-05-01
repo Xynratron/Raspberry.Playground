@@ -78,8 +78,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GpioPinServerSetStatus.cs" />
-    <Compile Include="ServerI2CActionsAddChannel.cs" />
+    <Compile Include="GpioPinServerProcessor.cs" />
+    <Compile Include="ServerI2CProcessor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

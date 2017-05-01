@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Concurrent;
-using System.Diagnostics;
-using log4net.Util;
 using Raspberry.IO.Components.Controllers.Pca9685;
 using Raspberry.IO.GeneralPurpose;
 using Raspberry.IO.InterIntegratedCircuit;
 using UnitsNet;
 
-namespace Esb.Raspberry
+namespace Raspberry.Helper
 {
     public class ServerI2CActionsBase
     {
