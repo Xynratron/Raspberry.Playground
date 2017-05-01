@@ -1,0 +1,12 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Bmf.Shared.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="HostId" Type="System.Guid" Scope="Application">
+      <Value Profile="(Default)">00000000-0000-0000-0000-000000000000</Value>
+    </Setting>
+    <Setting Name="JobserverUrl" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://192.168.10.71:8080/ESB</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

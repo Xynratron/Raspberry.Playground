@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Raspberry.Testing", "Raspbe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Raspberry.Helper", "Raspberry.Helper\Raspberry.Helper.csproj", "{60D43D82-3D7D-43BC-B5A1-429B6E7F9DF2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bmf.Shared", "Bmf.Shared\Bmf.Shared.csproj", "{28014FEA-C453-4F3F-9BC8-802E69822165}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{60D43D82-3D7D-43BC-B5A1-429B6E7F9DF2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{60D43D82-3D7D-43BC-B5A1-429B6E7F9DF2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{60D43D82-3D7D-43BC-B5A1-429B6E7F9DF2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{28014FEA-C453-4F3F-9BC8-802E69822165}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{28014FEA-C453-4F3F-9BC8-802E69822165}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{28014FEA-C453-4F3F-9BC8-802E69822165}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{28014FEA-C453-4F3F-9BC8-802E69822165}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
