@@ -1,4 +1,5 @@
-﻿using Bmf.Shared.Esb;
+﻿using System.Threading;
+using Bmf.Shared.Esb;
 using Raspberry.Helper;
 using Raspberry.IO.GeneralPurpose;
 
@@ -14,42 +15,42 @@ namespace Raspberry.Testing
 
             AllOff();
 
-            System.Threading.Thread.Sleep(1000);
+            Thread.Sleep(500);
 
             SetWithSingleBitValues();
 
-            System.Threading.Thread.Sleep(1000);
+            Thread.Sleep(500);
 
             SetASingleByte();
 
-            System.Threading.Thread.Sleep(1000);
+            Thread.Sleep(500);
 
             MoveUpAndDown();
 
-            System.Threading.Thread.Sleep(1000);
+            Thread.Sleep(500);
 
             CountUp();
             CountDown();
         }
 
-        static ProcessorPin data = ProcessorPin.Pin10;
-        static ProcessorPin latch = ProcessorPin.Pin08;
-        static ProcessorPin clock = ProcessorPin.Pin11;
+        static RaspiFluent data = ProcessorPin.Pin10.AsFluent();
+        static RaspiFluent latch = ProcessorPin.Pin08.AsFluent();
+        static RaspiFluent clock = ProcessorPin.Pin11.AsFluent();
+
         private static void MoveUpAndDown()
         {
-            var d = (byte)0x01;
-            for (var i = 1; i < 8; i++)
+            for (var i = 1; i < 256; i *= 2)
             {
-                SendByte(d);
-                WriteLatch();
-                d = (byte)(d << 1);
+                SendByte((byte)i);
+                Thread.Sleep(100);
             }
-            for (var i = 8; i > 0; i--)
+            
+            for (byte i = 128; i > 0; i = (byte)(i >> 1))
             {
-                SendByte(d);
-                WriteLatch();
-                d = (byte)(d >> 1);
+                SendByte(i);
+                Thread.Sleep(100);
             }
+            SendByte(0x0);
         }
 
         private static void CountDown()
@@ -57,7 +58,7 @@ namespace Raspberry.Testing
             for (int i = 255; i >= 0; i--)
             {
                 SendByte((byte)i);
-                WriteLatch();
+                Thread.Sleep(25);
             }
         }
 
@@ -66,14 +67,13 @@ namespace Raspberry.Testing
             for (int i = 0; i < 256; i++)
             {
                 SendByte((byte)i);
-                WriteLatch();
+                Thread.Sleep(25);
             }
         }
 
         private static void SetASingleByte()
         {
             SendByte(0xCD);
-            WriteLatch();
         }
 
         private static void SetWithSingleBitValues()
@@ -92,44 +92,37 @@ namespace Raspberry.Testing
         private static void AllOff()
         {
             SendByte(0x0);
-            WriteLatch();
         }
 
         private static void Initialize()
         {
-            MessageSender.Send(new GpioSetStatus(data, false));
-            MessageSender.Send(new GpioSetStatus(latch, false));
-            MessageSender.Send(new GpioSetStatus(clock, false));
+            data.Off();
+            latch.Off();
+            clock.Off();
         }
 
         private static void SendByte(byte data)
         {
-            var a = (int)data;
-            for (int i = 0; i < 8; i++)
-            {
-                SendBit((a & 0x01) == 0x01);
-                a = a >> 1;
-            }
+            SendBit((data & 0b00000001) != 0);
+            SendBit((data & 0b00000010) != 0);
+            SendBit((data & 0b00000100) != 0);
+            SendBit((data & 0b00001000) != 0);
+            SendBit((data & 0b00010000) != 0);
+            SendBit((data & 0b00100000) != 0);
+            SendBit((data & 0b01000000) != 0);
+            SendBit((data & 0b10000000) != 0);
+            WriteLatch();
         }
 
         private static void SendBit(bool value)
         {
-            MessageSender.Send(new GpioSetStatus(data, value));
-            MessageSender.Send(new GpioSetStatus(clock, true));
-            MessageSender.Send(new GpioSetStatus(clock, false));
+            data.Set(value);
+            clock.On().Off();
         }
 
         private static void WriteLatch()
         {
-            MessageSender.Send(new GpioSetStatus(latch, true));
-            MessageSender.Send(new GpioSetStatus(latch, false));
-        }
-
-        private static void Blink()
-        {
-            MessageSender.Send(new GpioSetStatus(ProcessorPin.Pin13, true));
-            System.Threading.Thread.Sleep(100);
-            MessageSender.Send(new GpioSetStatus(ProcessorPin.Pin13, false));
-        }
+            latch.On().Off();
+        }      
     }
 }

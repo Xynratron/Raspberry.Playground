@@ -11,7 +11,7 @@ namespace Raspberry.Testing
         {
             Console.WriteLine("Starting Program");
 
-            BlinkSomeLed.Start();
+            ShiftRegisterIoPlaying.Start();
 
             Console.WriteLine("Ending Program");
         }

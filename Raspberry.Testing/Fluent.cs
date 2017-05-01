@@ -41,6 +41,14 @@ namespace Raspberry.Testing
                 new GpioPinServer().SetStatus(new GpioSetStatus(Pin, false));
             return this;
         }
+        public RaspiFluent Set(bool status)
+        {
+            if (_IsRemote)
+                MessageSender.Send(new GpioSetStatus(Pin, status));
+            else
+                new GpioPinServer().SetStatus(new GpioSetStatus(Pin, status));
+            return this;
+        }
     }
 
     public static class RaspiFluentInit
@@ -49,7 +57,10 @@ namespace Raspberry.Testing
         {
             return new RaspiFluent {Pin = pin}.AsRemote();
         }
-
+        public static RaspiFluent AsFluent(this ProcessorPin pin)
+        {
+            return new RaspiFluent { Pin = pin };
+        }
         public static RaspiFluent On(this ProcessorPin pin)
         {
             return new RaspiFluent {Pin = pin}.On();
@@ -57,6 +68,10 @@ namespace Raspberry.Testing
         public static RaspiFluent Off(this ProcessorPin pin)
         {
             return new RaspiFluent { Pin = pin }.Off();
+        }
+        public static RaspiFluent Set(this ProcessorPin pin, bool status)
+        {
+            return new RaspiFluent { Pin = pin }.Set(status);
         }
     }
 }
